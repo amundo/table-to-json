@@ -41,6 +41,3 @@ let tableToJSON = (table, columnNames = null) => {
 export {
   tableToJSON
 }
-
-  // document.designMode = 'on'
-  // console.table(table2json(document.querySelector('table')))
