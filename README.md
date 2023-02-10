@@ -18,3 +18,9 @@ import { tableToJSON } from 'tableToJSON';
 let table = document.querySelector('table');
 let json = tableToJSON(table);
 console.log(json);
+
+
+## Problems
+
+* Doesn’t handle tables with `colspan` or `rowspan`
+* Doesn’t handle tables with `th`s beyond the first `tr`.
