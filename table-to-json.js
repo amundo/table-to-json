@@ -20,7 +20,7 @@ let tableToJSON = (table, columnNames = null) => {
   let data = trs
     .slice(1) // first row is column headers
     .map(row => {
-      let cells = Array.from(row.cells)
+      let cells = Array.from(row.querySelectorAll('td,th'))
         .map(cell => cell.textContent.trim())
 
       let entries = columnHeaders.map((_, i) => 
