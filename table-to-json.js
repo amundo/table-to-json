@@ -1,43 +1,36 @@
 let tableToJSON = (table, columnNames = null) => {
-  let trs = Array.from(table.querySelectorAll('tr'))
+  // Select all table rows
+  let trs = Array.from(table.querySelectorAll("tr"))
 
-  let columnHeaders = Array.from(trs[0].querySelectorAll('td,th'))
-    .map(cell => cell.textContent.trim())
+  // Extract column headers from the first row
+  let columnHeaders = Array.from(trs[0].querySelectorAll("td,th"))
+    .map((cell) => cell.textContent.trim())
 
-  if(columnNames){
+  // Check if custom column names are provided
+  if (columnNames) {
     columnHeaders = columnNames
   }
 
-  let rowHeaders = trs
-    .slice(1) // first row is headers
-    .map(row => {
-      let cells = Array.from(row.querySelectorAll('td,th'))
-        .map(cell => cell.textContent.trim())
+  // Extract row headers from the remaining rows
+  let rowHeaders = trs.slice(1).map((row) => {
+    let cells = Array.from(row.querySelectorAll("td,th"))
+      .map((cell) => cell.textContent.trim())
 
-      return cells[0]
-    })
+    return cells[0]
+  })
 
-  let data = trs
-    .slice(1) // first row is column headers
-    .map(row => {
-      let cells = Array.from(row.querySelectorAll('td,th'))
-        .map(cell => cell.textContent.trim())
+  // Extract data and convert it into JSON format
+  let data = trs.slice(1).map((row) => {
+    let cells = Array.from(row.querySelectorAll("td,th"))
+      .map((cell) => cell.textContent.trim())
 
-      let entries = columnHeaders.map((_, i) => 
-        [columnHeaders[i], cells[i]]
-      )
+    let entries = columnHeaders.map((header, i) => [header, cells[i]])
 
-      let item = Object.fromEntries(entries)
-      return item
-    })
+    let item = Object.fromEntries(entries)
+    return item
+  })
 
-  return {
-    rowHeaders,
-    columnHeaders,
-    data
-  }
+  return data
 }
 
-export {
-  tableToJSON
-}
+export { tableToJSON }
